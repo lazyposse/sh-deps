@@ -26,16 +26,16 @@
       (provided
        (find-all :dir) => ["a.txt" "b.sh" "c.txt"]))
 
-(defn path-to-node
+(defn path-to-node "basename"
   [p] (last (s/split p #"/")))
 
 (fact "path-to-node"
       (path-to-node "/tmp/bash.sh") => "bash.sh")
 
-(defn read-file
+(defn read-file "Read a file"
   [f] (slurp f))
 
-(defn children
+(defn children "Given a list of nodes and a script p, returns the list of nodes that belongs to p"
   [p all-nodes] (let [rf (read-file p)] (filter #(.contains rf %) all-nodes)))
 
 (fact "children"
@@ -43,7 +43,7 @@
       (provided
        (read-file :path) => " node2 "))
 
-(defn graph-read "Given a dir name return the corresponding graph"
+(defn graph-read "Given a dir name, return the corresponding graph"
   [dir] (let [p (find-path :dir), k (map path-to-node p)]
           (zipmap k
                   (map #(set (children % k)) p))))
