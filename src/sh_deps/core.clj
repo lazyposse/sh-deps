@@ -32,17 +32,17 @@
 (fact "path-to-node"
       (path-to-node "/tmp/bash.sh") => "bash.sh")
 
-(defn read
+(defn read-file
   [f] (slurp f))
 
 (defn children
-  [p all-nodes] (filter #(.contains (read p) %)
+  [p all-nodes] (filter #(.contains (read-file p) %)
                         all-nodes))
 
 (fact "children"
       (children :path ["node1" "node2"]) => ["node2"]
       (provided
-       (read :path) => " node2 "))
+       (read-file :path) => " node2 "))
 
 (defn graph-read "Given a dir name return the corresponding graph"
   [dir] (let [p (find-path :dir), k (map path-to-node p)]
