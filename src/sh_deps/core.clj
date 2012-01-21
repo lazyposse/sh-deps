@@ -68,17 +68,22 @@
 
 (defn graph-lines "Given a graph, create the graphviz dot lines in a seq."
   [g]
-  (mapcat
-   (fn [k] (map #(str k " -> " % ";") (g k)))
-   (keys g)))
+  (concat
+   ["digraph fn {"]
+   (mapcat
+    (fn [k] (map #(str "\"" k "\" -> \"" % "\";") (g k)))
+    (keys g))
+   ["}"]))
 
 (fact
   (graph-lines {"node1" #{"node3" "node2"}
                 "node2" #{"node1" "node3"}}) => (just
-                                                 ["node1 -> node3;"
-                                                  "node1 -> node2;"
-                                                  "node2 -> node1;"
-                                                  "node2 -> node3;"] :in-any-order))
+                                                 ["digraph fn {"
+                                                  "\"node1\" -> \"node3\";"
+                                                  "\"node1\" -> \"node2\";"
+                                                  "\"node2\" -> \"node1\";"
+                                                  "\"node2\" -> \"node3\";"
+                                                  "}"] :in-any-order))
 
 (defn graph-write
   [g] (write-lines "/tmp/graph.dot" (graph-lines g)))
