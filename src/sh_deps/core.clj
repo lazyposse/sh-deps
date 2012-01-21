@@ -81,13 +81,13 @@
                                                   "node2 -> node3;"] :in-any-order))
 
 (defn graph-write
-  [g] (write-lines (graph-lines g)))
+  [g] (write-lines "/tmp/graph.dot" (graph-lines g)))
 
 (fact "graph-write"
       (graph-write :g) => nil
       (provided
        (graph-lines :g) => :lines
-       (write-lines :lines) => nil))
+       (write-lines "/tmp/graph.dot" :lines) => nil))
 
 (defn graph "Output a dot file representing the relationships between the scripts in the given directory."
   [dir] (graph-write (graph-read dir)))
