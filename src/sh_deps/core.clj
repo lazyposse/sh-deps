@@ -1,6 +1,8 @@
-(ns ^{:doc "Problem: http://www.4clojure.com/problem/91"}
+(ns ^{:doc "Shell dependency graph/home/tony/repositories/pro/wikeo/wikeo-parent/wikeo-deployer/src/main/resource//universal-kp"}
   sh-deps.core
   (:use [midje.sweet])
+  (:use clojure.repl)
+  (:use clojure.java.javadoc)
   (:require [clojure.string :as s])
   (:require [clojure.java.shell :as sh]))
 ;; sh-deps --------------------------------------------------------------------------------
