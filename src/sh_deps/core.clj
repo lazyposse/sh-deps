@@ -11,7 +11,7 @@
 
 (prn "---------- begin ------------")
 
-(unfinished graph-lines )
+(unfinished)
 
 (defn find-all "Find all the files from the directory d"
   [d] (s/split (:out (sh/sh "find" d)) #"\n"))
@@ -65,6 +65,20 @@
       (let [fname "/tmp/tst.txt"]
         (write-lines fname [1 2]) => nil
         (slurp fname) => "1\n2"))
+
+(defn graph-lines "Given a graph, create the graphviz dot lines in a seq."
+  [g]
+  (mapcat
+   (fn [k] (map #(str k " -> " % ";") (g k)))
+   (keys g)))
+
+(fact
+  (graph-lines {"node1" #{"node3" "node2"}
+                "node2" #{"node1" "node3"}}) => (just
+                                                 ["node1 -> node3;"
+                                                  "node1 -> node2;"
+                                                  "node2 -> node1;"
+                                                  "node2 -> node3;"] :in-any-order))
 
 (defn graph-write
   [g] (write-lines (graph-lines g)))
