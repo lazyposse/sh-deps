@@ -36,8 +36,7 @@
   [f] (slurp f))
 
 (defn children
-  [p all-nodes] (filter #(.contains (read-file p) %)
-                        all-nodes))
+  [p all-nodes] (let [rf (read-file p)] (filter #(.contains rf %) all-nodes)))
 
 (fact "children"
       (children :path ["node1" "node2"]) => ["node2"]
