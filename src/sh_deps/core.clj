@@ -1,24 +1,25 @@
 (ns ^{:doc "Shell dependency graph/home/tony/repositories/pro/wikeo/wikeo-parent/wikeo-deployer/src/main/resource//universal-kp"}
   sh-deps.core
-  (:use [midje.sweet])
-  (:use clojure.repl)
-  (:use clojure.java.javadoc)
-  (:require [clojure.string :as s])
-  (:require [clojure.java.shell :as sh]))
+  (:use [midje.sweet]
+        clojure.repl
+        clojure.java.javadoc
+        [clojure.pprint :only [pprint]]) 
+  (:require [clojure.string :as s]
+            [clojure.java.shell :as sh]))
+
 ;; sh-deps --------------------------------------------------------------------------------
 
 (prn "---------- begin ------------")
 
 (unfinished graph-lines )
 
-(defn find-all
-  [d] (sh/sh "find" d))
+(defn find-all "Find all the files from the directory d"
+  [d] (split (:out (sh/sh "find" d)) #"\n"))
 
 (fact "find-all"
-      (> (count (:out (find-all "/tmp")))
-         1) => true)
+  (> (count (find-all "/tmp")) 1) => true)
 
-(defn find-path
+(defn find-path "Find only the script from the directory d"
   [d] (filter #(= (seq ".sh") (take-last 3 %)) (find-all d)))
 
 (fact "find-path"
