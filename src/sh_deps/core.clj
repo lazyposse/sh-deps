@@ -14,7 +14,7 @@
 (unfinished graph-lines )
 
 (defn find-all "Find all the files from the directory d"
-  [d] (split (:out (sh/sh "find" d)) #"\n"))
+  [d] (s/split (:out (sh/sh "find" d)) #"\n"))
 
 (fact "find-all"
   (> (count (find-all "/tmp")) 1) => true)
