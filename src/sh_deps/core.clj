@@ -46,8 +46,8 @@
 
 (defn graph-read "Given a directory d, return the corresponding graph"
   [d] (let [p (find-path d), k (map path-to-node p)]
-          (zipmap k
-                  (map #(set (children % k)) p))))
+        (zipmap k
+                (map #(set (children % k)) p))))
 
 (fact "graph-read"
       (graph-read :d) => {:node1 #{:node2}, :node2 #{:node1}}
