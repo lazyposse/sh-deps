@@ -1,10 +1,10 @@
-# denlab-4clojure-exercices
+# sh-deps
 
-FIXME: write description
+Tool to generate a graphiz dot file with the dependency between the shell script of a project.
 
 ## Usage
 
-FIXME: write
+NOT-READY-YET 
 
 ## License
 
