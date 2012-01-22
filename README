@@ -4,7 +4,38 @@ Tool to generate a graphiz dot file with the dependency between the shell script
 
 ## Usage
 
-NOT-READY-YET 
+In the repl:
+
+``` clojure
+sh-deps.core> (-main "--directory" "/home/tony/bin" "--graph-file" "/home/tony/graph.dot")
+Scanning directory /home/tony/bin and generating graph dot file /home/tony/graph.dot.
+nil
+sh-deps.core>
+```
+
+In the command line:
+
+``` sh
+tony@dagobah(0.28,) 22:23:34 (130) ~/repositories/perso/sh-deps (master) $ lein run --help
+"---------- begin ------------"
+"---------- end ------------"
+Usage:
+
+ Switches               Default  Desc                       
+ --------               -------  ----                       
+ -h, --no-help, --help  false    Show help                  
+ -d, --directory                 Directory to analyze       
+ -g, --graph-file                Graph dot file to generate 
+
+
+``` sh
+tony@dagobah(0.28,) 22:26:30 (130) ~/repositories/perso/sh-deps (master) $ lein run --directory /home/tony/bin --graph-file /home/tony/graph.dot
+"---------- begin ------------"
+"---------- end ------------"
+Scanning directory /home/tony/bin and generating graph dot file /home/tony/graph.dot .
+``` 
+
+You may need to hit CTRL+C to stop the program and exit (we are still searching why at the moment).
 
 ## License
 

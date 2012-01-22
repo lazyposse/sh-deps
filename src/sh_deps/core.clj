@@ -3,7 +3,8 @@
   (:use [midje.sweet]
         clojure.repl
         clojure.java.javadoc
-        [clojure.pprint :only [pprint]]) 
+        [clojure.pprint :only [pprint]]
+        [clojure.tools.cli]) 
   (:require [clojure.string :as s]
             [clojure.java.shell :as sh]))
 
@@ -107,5 +108,20 @@
       (provided
        (graph-read :dir) => :graph
        (graph-write :graph :filename) => nil))
+
+(defn -main [& args]
+  (let [[options args banner :as opts]
+        (cli args
+             ["-h" "--help"       "Show help" :default false :flag true]
+             ["-d" "--directory"  "Directory to analyze"]
+             ["-g" "--graph-file" "Graph dot file to generate" ])]
+
+    (when (options :help)
+      (println banner)
+      (System/exit 0))
+
+    (println "Scanning directory" (options :directory) "and generating graph dot file" (options :graph-file) ".")
+    ;; generates the import files
+    (graph (options :directory) (options :graph-file))))
 
 (prn "---------- end ------------")
