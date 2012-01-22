@@ -1,4 +1,4 @@
-(ns ^{:doc "Shell dependency graph/home/tony/repositories/pro/wikeo/wikeo-parent/wikeo-deployer/src/main/resource//universal-kp"}
+(ns ^{:doc "Shell dependency graph"}
   sh-deps.core
   (:use [midje.sweet]
         clojure.repl
