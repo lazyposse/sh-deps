@@ -90,22 +90,22 @@
                                    "\"node2\" -> \"node3\";"
                                    "}"] :in-any-order))
 
-(defn graph-write
-  [g] (write-lines "/tmp/graph.dot" (graph-lines g)))
+(defn graph-write "Given a graph and a filename, write the content of the graph into the filename f with a dot format."
+  [g f] (write-lines f (graph-lines g)))
 
 (fact "graph-write"
-      (graph-write :g) => nil
+      (graph-write :g :filename) => nil
       (provided
        (graph-lines :g) => :lines
-       (write-lines "/tmp/graph.dot" :lines) => nil))
+       (write-lines :filename :lines) => nil))
 
-(defn graph "Output a dot file representing the relationships between the scripts in the given directory."
-  [dir] (graph-write (graph-read dir)))
+(defn graph "Output a dot file f representing the relationships between the scripts in the given directory d."
+  [d f] (graph-write (graph-read d) f))
 
 (fact "graph"
-      (graph :dir) => nil
+      (graph :dir :filename) => nil
       (provided
        (graph-read :dir) => :graph
-       (graph-write :graph) => nil))
+       (graph-write :graph :filename) => nil))
 
 (prn "---------- end ------------")
