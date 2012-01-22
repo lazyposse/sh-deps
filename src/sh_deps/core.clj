@@ -66,24 +66,29 @@
         (write-lines fname [1 2]) => nil
         (slurp fname) => "1\n2"))
 
-(defn graph-lines "Given a graph, create the graphviz dot lines in a seq."
+(defn graph-lines "Given a graph, create the graphviz dot lines in a seq. Add the nodes then the relations between them."
   [g]
-  (concat
-   ["digraph fn {"]
-   (mapcat
-    (fn [k] (map #(str "\"" k "\" -> \"" % "\";") (g k)))
-    (keys g))
-   ["}"]))
+  (let [ks (keys g)]
+    (concat
+     ["digraph fn {"]
+     (map #(str "\"" % "\";") ks)
+     (mapcat
+      (fn [k] (map #(str "\"" k "\" -> \"" % "\";") (g k)))
+      ks)
+     ["}"])))
 
 (fact
-  (graph-lines {"node1" #{"node3" "node2"}
-                "node2" #{"node1" "node3"}}) => (just
-                                                 ["digraph fn {"
-                                                  "\"node1\" -> \"node3\";"
-                                                  "\"node1\" -> \"node2\";"
-                                                  "\"node2\" -> \"node1\";"
-                                                  "\"node2\" -> \"node3\";"
-                                                  "}"] :in-any-order))
+  (graph-lines {"node1" #{"node2"}
+                "node2" #{"node1" "node3"}
+                "node3" #{}}) => (just
+                                  ["digraph fn {"
+                                   "\"node1\";"
+                                   "\"node2\";"
+                                   "\"node3\";"
+                                   "\"node1\" -> \"node2\";"
+                                   "\"node2\" -> \"node1\";"
+                                   "\"node2\" -> \"node3\";"
+                                   "}"] :in-any-order))
 
 (defn graph-write
   [g] (write-lines "/tmp/graph.dot" (graph-lines g)))
