@@ -41,8 +41,8 @@
 
 (defmulti graph-read :type)
 
-(defmethod graph-read ::sh [d]
-  (let [p (find-path (:dir d)), k (map path-to-node p)]
+(defmethod graph-read ::sh [m]
+  (let [p (find-path (:dir m)), k (map path-to-node p)]
     (zipmap k
             (map #(set (children % k)) p)))) 
 
