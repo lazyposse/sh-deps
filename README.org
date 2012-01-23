@@ -1,0 +1,44 @@
+* sh-deps
+
+Tool to generate a graphiz dot file with the dependency between the shell scripts of a project.
+
+* Usage
+
+** In the repl:
+
+#+BEGIN_SRC clojure
+sh-deps.core> (-main "--directory" "/home/tony/bin" "--graph-file" "/home/tony/graph.dot")
+Scanning directory /home/tony/bin and generating graph dot file /home/tony/graph.dot.
+nil
+sh-deps.core>
+#+END_SRC
+
+** In the command line:
+
+#+BEGIN_SRC sh
+tony@dagobah(0.28,) 22:23:34 (130) ~/repositories/perso/sh-deps (master) $ lein run --help
+"---------- begin ------------"
+"---------- end ------------"
+Usage:
+
+ Switches               Default  Desc                       
+ --------               -------  ----                       
+ -h, --no-help, --help  false    Show help                  
+ -d, --directory                 Directory to analyze       
+ -g, --graph-file                Graph dot file to generate 
+#+END_SRC
+
+#+BEGIN_SRC sh
+tony@dagobah(0.28,) 22:26:30 (130) ~/repositories/perso/sh-deps (master) $ lein run --directory /home/tony/bin --graph-file /home/tony/graph.dot
+"---------- begin ------------"
+"---------- end ------------"
+Scanning directory /home/tony/bin and generating graph dot file /home/tony/graph.dot .
+#+END_SRC
+
+You may need to hit CTRL+C to stop the program and exit (we are still searching why at the moment).
+
+* License
+
+Copyright (C) 2012 FIXME
+
+Distributed under the Eclipse Public License, the same as Clojure.
