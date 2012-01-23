@@ -51,12 +51,12 @@
        (write-lines :filename :lines) => nil))
 
 (defn- graph "Output a dot file f representing the relationships between the scripts in the given directory d."
-  [d f] (graph-write (sd/graph-read {:type ::sh, :dir d}) f))
+  [d f] (graph-write (sd/graph-read {:type :sh-deps.sh/sh, :dir d}) f))
 
 (fact "graph"
       (graph :dir :filename) => nil
       (provided
-       (sd/graph-read {:type ::sh, :dir :dir}) => :graph
+       (sd/graph-read {:type :sh-deps.sh/sh, :dir :dir}) => :graph
        (graph-write :graph :filename) => nil))
 
 (defn -main [& args]
