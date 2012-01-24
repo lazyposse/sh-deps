@@ -62,7 +62,6 @@
 (defn generate-graph "Generate the png file"
   [f]
   (let [s (str f ".png")]
-    (println "Generating graph" s)
     (shell/sh "dot" "-Tpng" f "-o" s)))
 
 (fact
@@ -76,7 +75,7 @@
              ["-h" "--help"              "Show help" :default false :flag true]
              ["-d" "--directory"         "Directory to analyze"]
              ["-o" "--output-dot-file"   "Graph dot file to generate"]
-             ["-g" "--graph"             "Generate the png from the dot file" :default false :flag true])]
+             ["-g" "--graph"             "Generate the png from the dot file (needs graphviz in the classpath)" :default false :flag true])]
 
     (when (options :help)
       (println banner)
