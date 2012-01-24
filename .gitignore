@@ -6,3 +6,6 @@
 /.lein-failures
 /checkouts
 /.lein-deps-sum
+graph-test.dot.png
+test.dot.png
+test.png
