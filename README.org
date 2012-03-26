@@ -16,18 +16,17 @@ sh-deps.core>
 ** In the command line:
 
 #+BEGIN_SRC sh
-tony@dagobah(0.28,) 22:23:34 (130) ~/repositories/perso/sh-deps (master) $ lein run --help
+tony@dagobah(0.28,) 22:23:34 (130) ~ (master) $ lein run --help
 Usage:
 
  Switches               Default  Desc                       
- --------               -------  ----                       
  -h, --no-help, --help  false    Show help                  
  -d, --directory                 Directory to analyze       
  -g, --graph-file                Graph dot file to generate 
 #+END_SRC
 
 #+BEGIN_SRC sh
-tony@dagobah(0.28,) 22:26:30 (130) ~/repositories/perso/sh-deps (master) $ lein run --directory /home/tony/bin --graph-file /home/tony/graph.dot
+tony@dagobah(0.28,) 22:26:30 ~ (master) $ lein run --directory /home/tony/bin --graph-file /home/tony/graph.dot
 Scanning directory /home/tony/bin and generating graph dot file /home/tony/graph.dot .
 #+END_SRC
 
