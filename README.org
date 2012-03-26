@@ -17,8 +17,6 @@ sh-deps.core>
 
 #+BEGIN_SRC sh
 tony@dagobah(0.28,) 22:23:34 (130) ~/repositories/perso/sh-deps (master) $ lein run --help
-"---------- begin ------------"
-"---------- end ------------"
 Usage:
 
  Switches               Default  Desc                       
@@ -30,15 +28,11 @@ Usage:
 
 #+BEGIN_SRC sh
 tony@dagobah(0.28,) 22:26:30 (130) ~/repositories/perso/sh-deps (master) $ lein run --directory /home/tony/bin --graph-file /home/tony/graph.dot
-"---------- begin ------------"
-"---------- end ------------"
 Scanning directory /home/tony/bin and generating graph dot file /home/tony/graph.dot .
 #+END_SRC
 
-You may need to hit CTRL+C to stop the program and exit (we are still searching why at the moment).
-
 * License
 
-Copyright (C) 2012 FIXME
+Copyright (C) 2012 commiters
 
 Distributed under the Eclipse Public License, the same as Clojure.
