@@ -1,10 +1,10 @@
 (ns ^{:doc "Specific implem for shell scripts"}
-  sh-deps.sh 
+  sh-deps.sh
   (:use [midje.sweet]
         clojure.repl
         clojure.java.javadoc
         [clojure.pprint :only [pprint]]
-        [clojure.tools.cli]) 
+        [clojure.tools.cli])
   (:require [clojure.string :as s]
             [clojure.java.shell :as sh]))
 
@@ -21,30 +21,31 @@
   [p all-nodes] (let [rf (read-file p)] (filter #(.contains rf %) all-nodes)))
 
 (fact "children"
-      (children :path ["node1" "node2"]) => ["node2"]
-      (provided
-       (read-file :path) => " node2 "))
+  (children :path ["node1" "node2"]) => ["node2"]
+  (provided
+    (read-file :path) => " node2 "))
 
 (defn- find-path "Find only the script from the directory d"
-  [d] (filter #(= (seq ".sh") (take-last 3 %)) (find-all d)))
+  [d] (filter #(.endsWith % "sh") (find-all d)))
 
 (fact "find-path"
-      (find-path :dir) => ["b.sh"]
-      (provided
-       (find-all :dir) => ["a.txt" "b.sh" "c.txt"]))
+  (find-path :dir) => ["b.sh"]
+  (provided
+    (find-all :dir) => ["a.txt" "b.sh" "c.txt"]))
 
 (defn- path-to-node "basename"
   [p] (last (s/split p #"/")))
 
 (fact "path-to-node"
-      (path-to-node "/tmp/bash.sh") => "bash.sh")
+  (path-to-node "/tmp/bash.sh") => "bash.sh")
 
+;; multimethod to dispatch on the :type keyword
 (defmulti graph-read :type)
 
 (defmethod graph-read ::sh [m]
   (let [p (find-path (:dir m)), k (map path-to-node p)]
     (zipmap k
-            (map #(set (children % k)) p)))) 
+            (map #(set (children % k)) p))))
 
 (fact "graph-read::sh"
       (graph-read {:type ::sh, :dir :d}) => {:node1 #{:node2}, :node2 #{:node1}}
