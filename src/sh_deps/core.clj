@@ -93,8 +93,9 @@
 
     (println "done!")))
 
-(fact "-main"
-  (-main "-d" "dir" "-o" "dot-file" "-g") => nil
-  (provided
-    (graph "dir" "dot-file") => nil
-    (generate-graph "dot-file") => nil))
+(comment
+  (fact "-main"
+    (-main "-d" "dir" "-o" "dot-file" "-g") => nil
+    (provided
+      (graph "dir" "dot-file") => nil
+      (generate-graph "dot-file") => nil)))
