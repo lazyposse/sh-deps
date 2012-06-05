@@ -5,7 +5,7 @@
         clojure.java.javadoc
         [clojure.pprint :only [pprint]]
         [clojure.tools.cli]
-        [sh-deps.sh         :as sd :only [graph-read]]) 
+        [sh-deps.sh         :as sd :only [graph-read]])
   (:require [clojure.string     :as s]
             [clojure.java.shell :as shell]))
 
@@ -13,9 +13,9 @@
   [fname lines] (spit fname (s/join "\n" lines)))
 
 (fact "write-lines"
-      (let [fname "/tmp/tst.txt"]
-        (write-lines fname [1 2]) => nil
-        (slurp fname) => "1\n2"))
+  (let [fname "/tmp/tst.txt"]
+    (write-lines fname [1 2]) => nil
+    (slurp fname) => "1\n2"))
 
 (defn- graph-lines "Given a graph, create the graphviz dot lines in a seq. Add the nodes then the relations between them."
   [g]
@@ -24,7 +24,8 @@
      ["digraph fn {"]
      (map #(str "\"" % "\";") ks)
      (mapcat
-      (fn [k] (map #(str "\"" k "\" -> \"" % "\";") (g k)))
+      (fn [k]
+        (map #(str "\"" k "\" -> \"" % "\";") (g k)))
       ks)
      ["}"])))
 
